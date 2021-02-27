@@ -10,7 +10,7 @@ with io.open("README.md", "r", encoding="utf-8") as f:
     long_description = f.read()
 
 setup(
-    name="elasticsearch-dbapi",
+    name="pupu-elasticsearch-dbapi",
     description=("A DBAPI and SQLAlchemy dialect for Elasticsearch"),
     long_description=long_description,
     long_description_content_type="text/markdown",
