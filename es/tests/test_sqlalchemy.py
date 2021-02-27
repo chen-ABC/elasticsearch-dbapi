@@ -282,7 +282,7 @@ class TestSQLAlchemy(unittest.TestCase):
         )
         self.connection = self.engine.connect()
         mock_elasticsearch.assert_called_once_with(
-            "http://localhost:9200/",
+            "http://192.168.0.21:9200/",
             sniff_on_start=True,
             sniff_on_connection_fail=True,
             sniffer_timeout=3,

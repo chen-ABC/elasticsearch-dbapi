@@ -8,8 +8,7 @@ from six import string_types
 from six.moves.urllib import parse
 
 
-from .const import DEFAULT_FETCH_SIZE, DEFAULT_SCHEMA, DEFAULT_SQL_PATH
-
+from .const import DEFAULT_FETCH_SIZE, DEFAULT_SCHEMA, DEFAULT_SQL_PATH, DEFAULT_V7_SQL_PATH
 
 CursorDescriptionRow = namedtuple(
     "CursorDescriptionRow",
@@ -188,7 +187,8 @@ class BaseCursor:
         """
         self.url = url
         self.es = es
-        self.sql_path = kwargs.get("sql_path") or DEFAULT_SQL_PATH
+        version = es.info()['version']['number']
+        self.sql_path = kwargs.get("sql_path") or (DEFAULT_SQL_PATH if version.startswith('6') else DEFAULT_V7_SQL_PATH)
         self.fetch_size = kwargs.get("fetch_size") or DEFAULT_FETCH_SIZE
         # This read/write attribute specifies the number of rows to fetch at a
         # time with .fetchmany(). It defaults to 1 meaning to fetch a single

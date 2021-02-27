@@ -84,7 +84,6 @@ class Cursor(BaseCursor):
 
     def __init__(self, url: str, es: Elasticsearch, **kwargs: Any) -> None:
         super().__init__(url, es, **kwargs)
-        self.sql_path = kwargs.get("sql_path") or "_sql"
 
     def get_valid_table_view_names(self, type_filter: str) -> "Cursor":
         """
@@ -163,7 +162,7 @@ class Cursor(BaseCursor):
                 f"Error ({e.error}): {e.info['error']['reason']}"
             )
         try:
-            if response["hits"]["total"]["value"] == 0:
+            if response["hits"]["total"] == 0 or response["hits"]["total"]["value"] == 0:
                 source = {}
             else:
                 source = response["hits"]["hits"][0]["_source"]
