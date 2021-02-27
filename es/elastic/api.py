@@ -162,10 +162,16 @@ class Cursor(BaseCursor):
                 f"Error ({e.error}): {e.info['error']['reason']}"
             )
         try:
-            if response["hits"]["total"] == 0 or response["hits"]["total"]["value"] == 0:
-                source = {}
+            if isinstance(response["hits"]["total"], int):
+                if response["hits"]["total"] == 0:
+                    source = {}
+                else:
+                    source = response["hits"]["hits"][0]["_source"]
             else:
-                source = response["hits"]["hits"][0]["_source"]
+                if response["hits"]["total"]["value"] == 0:
+                    source = {}
+                else:
+                    source = response["hits"]["hits"][0]["_source"]
         except KeyError as e:
             raise exceptions.DataError(
                 f"Error inferring array type columns {self.url}: {e}"
