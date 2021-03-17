@@ -20,13 +20,13 @@ This library supports Elasticsearch 7.X versions.
 ### Installation
 
 ```bash
-$ pip install elasticsearch-dbapi
+$ pip install pupu-elasticsearch-dbapi
 ```  
 
 To install support for AWS Elasticsearch Service / [Open Distro](https://opendistro.github.io/for-elasticsearch/features/SQL%20Support.html):
 
 ```bash
-$ pip install elasticsearch-dbapi[opendistro]
+$ pip install pupu-elasticsearch-dbapi[opendistro]
 ```  
 
 ### Usage:
