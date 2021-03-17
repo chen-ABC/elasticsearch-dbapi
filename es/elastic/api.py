@@ -97,19 +97,19 @@ class Cursor(BaseCursor):
         :param: type_filter will filter SHOW_TABLES result by BASE_TABLE or VIEW
         """
         results = self.execute("SHOW TABLES")
-        response = self.es.cat.indices(format="json")
+        # response = self.es.cat.indices(format="json")
 
         _results = []
         for result in results:
-            is_empty = False
-            for item in response:
-                # First column is TABLE_NAME
-                if item["index"] == result[0]:
-                    if int(item["docs.count"]) == 0:
-                        is_empty = True
-                        break
-            if not is_empty and result[1] == type_filter:
-                _results.append(result)
+            # is_empty = False
+            # for item in response:
+            #     # First column is TABLE_NAME
+            #     if item["index"] == result[0]:
+            #         if int(item["docs.count"]) == 0:
+            #             is_empty = True
+            #             break
+            # if not is_empty and result[1] == type_filter:
+            _results.append(result)
         self._results = _results
         return self
 
